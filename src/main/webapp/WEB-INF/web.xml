@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<web-app version="3.0"   
+    xmlns="http://java.sun.com/xml/ns/javaee"   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">  
+  <display-name>Archetype Created Web Application</display-name>  
+  <!-- 配置springmvc servlet -->
+  <servlet>
+  	<servlet-name>springmvc</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	 <init-param> 
+  	 	<param-name>contextConfigLocation</param-name> 
+  	 	<param-value>classpath:/spring/spring-servlet.xml</param-value>
+  	 </init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!-- spring监听器 -->
+  <servlet-mapping>
+  	<servlet-name>springmvc</servlet-name>
+  	<!-- 表示所有的请求都要经过springmvc servlet -->
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring/spring-config.xml</param-value>
+	</context-param>
+  
+  <!-- log4j-->
+    <context-param>    
+        <param-name>isLog4jAutoInitializationDisabled</param-name>    
+        <param-value>false</param-value>    
+    </context-param>    
+    <context-param>    
+        <param-name>log4jConfiguration</param-name>    
+        <param-value>classpath:/spring/log4j2.xml</param-value>    
+    </context-param>    
+   <listener>    
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>    
+    </listener>    
+     
+    <filter>    
+        <filter-name>log4jServletFilter</filter-name>    
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>    
+    </filter>    
+    <filter-mapping>    
+        <filter-name>log4jServletFilter</filter-name>    
+        <url-pattern>/*</url-pattern>    
+        <dispatcher>REQUEST</dispatcher>    
+        <dispatcher>FORWARD</dispatcher>    
+        <dispatcher>INCLUDE</dispatcher>    
+        <dispatcher>ERROR</dispatcher>    
+    </filter-mapping>  
+   
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  </web-app>
